@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Spritesheet.Pipeline", "MonoGame.Spritesheet.Pipeline\MonoGame.Spritesheet.Pipeline.csproj", "{B6CF4961-729C-4D94-B087-922DE28345C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Spritesheet", "MonoGame.Spritesheet\MonoGame.Spritesheet.csproj", "{FE6D8C5F-6F96-4449-A815-40C115C68311}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6CF4961-729C-4D94-B087-922DE28345C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6CF4961-729C-4D94-B087-922DE28345C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6CF4961-729C-4D94-B087-922DE28345C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6CF4961-729C-4D94-B087-922DE28345C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE6D8C5F-6F96-4449-A815-40C115C68311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE6D8C5F-6F96-4449-A815-40C115C68311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE6D8C5F-6F96-4449-A815-40C115C68311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE6D8C5F-6F96-4449-A815-40C115C68311}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
