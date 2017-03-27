@@ -50,9 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SheetContent.cs" />
     <Compile Include="SheetProcessor.cs" />
+    <Compile Include="GridSheetProcessor.cs" />
+    <Compile Include="SheetContent.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="GridSheetContent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
