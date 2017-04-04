@@ -19,12 +19,11 @@
 /processor:SheetProcessor
 /processorParam:ColorKeyColor=255,0,255,255
 /processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/processorParam:Padding=0
+/processorParam:Padding=1
 /processorParam:SheetData=character.json
 /build:character.png
 
