@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
 
-namespace MonoGame.Spritesheet.Pipeline
+namespace MonoGame.Spritesheet.Pipeline.Utils
 {
     static class Cropping
     {

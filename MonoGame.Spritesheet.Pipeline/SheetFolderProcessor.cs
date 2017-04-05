@@ -8,13 +8,13 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
 using Microsoft.Xna.Framework.Content.Pipeline.Processors;
 using MonoGame.Spritesheet.Pipeline.Packing;
-using MonoGame.Spritesheet.Pipeline.Utils;
 using Newtonsoft.Json;
+using MonoGame.Spritesheet.Pipeline.Utils;
 
 namespace MonoGame.Spritesheet.Pipeline
 {
-    [ContentProcessor(DisplayName = "Sheet - Spritesheet")]
-    public class SheetProcessor : ContentProcessor<TextureContent, SheetContent>
+    [ContentProcessor(DisplayName ="SheetFolder - Spritesheet")]
+    public class SheetFolderProcessor : ContentProcessor<SheetFolder, SheetContent>
     {
         [DefaultValue(typeof(Color), "255,0,255,255")]
         public Color ColorKeyColor { get; set; } = Color.Magenta;
@@ -30,16 +30,10 @@ namespace MonoGame.Spritesheet.Pipeline
         [DefaultValue(0)]
         public int Padding { get; set; } = 0;
 
-        [DefaultValue("SheetData.json")]
-        public string SheetData { get; set; } = "SheetData.json";
 
-
-        public override SheetContent Process(TextureContent input, ContentProcessorContext context)
+        public override SheetContent Process(SheetFolder input, ContentProcessorContext context)
         {
-            if (!string.IsNullOrWhiteSpace(SheetData))
-                context.AddDependency(SheetData);
-
-            var sprites = LoadSpritebounds(SheetData);
+            var sprites = input.Textures.ToDictionary(i => i.Name, i => i.Faces.Single().Single().GetBounds());
 
             var sources = new Rectangle[sprites.Count];
             var names = new Dictionary<string, int>(sources.Length);
@@ -53,7 +47,7 @@ namespace MonoGame.Spritesheet.Pipeline
                 }
             }
 
-            TrimSources(ref sources, input, ColorKeyEnabled ? ColorKeyColor : Color.TransparentBlack, Padding);
+            TrimSources(ref sources, input.Textures, names, ColorKeyEnabled ? ColorKeyColor : Color.TransparentBlack, Padding);
             var destinations = Packer.Pack(sources);
             //Deflate
             for (int i = 0; i < destinations.Length; i++)
@@ -62,9 +56,9 @@ namespace MonoGame.Spritesheet.Pipeline
                 dst.Inflate(-Padding, -Padding);
             }
 
-            PackTexture(sources, destinations, ref input, Padding);
-
-            var texture = context.Convert<TextureContent, Texture2DContent>(input, nameof(TextureProcessor), context.Parameters);
+            var tmp = PackTexture(sources, destinations, input.Textures, names, Padding);
+            
+            var texture = context.Convert<TextureContent, Texture2DContent>(tmp, nameof(TextureProcessor), context.Parameters);
             var result = new SheetContent
             {
                 Texture = texture,
@@ -76,29 +70,34 @@ namespace MonoGame.Spritesheet.Pipeline
             return result;
         }
 
-        static void TrimSources(ref Rectangle[] sources, TextureContent texture, Color colorKey, int padding)
+        static void TrimSources(ref Rectangle[] sources, IEnumerable<TextureContent> textures, Dictionary<string, int> names, Color colorKey, int padding)
         {
-            var sourceBitmap = texture.Faces.Single().Single();
-            var destinationBitmap = new PixelBitmapContent<Color>(sourceBitmap.Width, sourceBitmap.Height);
-            BitmapContent.Copy(sourceBitmap, destinationBitmap);
-            for (int i = 0; i < sources.Length; i++)
+            foreach (var texture in textures)
             {
-                ref Rectangle src = ref sources[i];
+                var sourceBitmap = texture.Faces.Single().Single();
+                var destinationBitmap = new PixelBitmapContent<Color>(sourceBitmap.Width, sourceBitmap.Height);
+                BitmapContent.Copy(sourceBitmap, destinationBitmap);
+
+                ref Rectangle src = ref sources[names[texture.Name]];
                 Cropping.TrimRect(ref src, destinationBitmap, colorKey);
                 //Inflate
                 src.Inflate(padding, padding);
             }
         }
 
-        static void PackTexture(Rectangle[] sources, Rectangle[] destinations, ref TextureContent texture, int padding)
+        static Texture2DContent PackTexture(Rectangle[] sources, Rectangle[] destinations, IEnumerable<TextureContent> textures, Dictionary<string, int> names, int padding)
         {
             if (sources.Length != destinations.Length)
                 throw new ArgumentException("Array mismatch");
-            var face = texture.Faces.Single();
-            var bitmap = face.Single();
+
             var destBitmap = new PixelBitmapContent<Color>(destinations.Max(r => r.Right), destinations.Max(r => r.Bottom));
-            for (int i = 0; i < sources.Length; i++)
+            foreach (var texture in textures)
             {
+
+                var face = texture.Faces.Single();
+
+                var bitmap = face.Single();
+                var i = names[texture.Name];
                 var src = sources[i];
 
                 //Deflate
@@ -107,8 +106,10 @@ namespace MonoGame.Spritesheet.Pipeline
                 BitmapContent.Copy(bitmap, src, destBitmap, destinations[i]);
             }
 
+            var result = new Texture2DContent();
+            result.Mipmaps.Add(destBitmap);
 
-            face[0] = destBitmap;
+            return result;
         }
 
         static Dictionary<string, Rectangle> LoadSpritebounds(string path)

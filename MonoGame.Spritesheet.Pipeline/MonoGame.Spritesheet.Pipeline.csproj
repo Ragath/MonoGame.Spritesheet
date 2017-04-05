@@ -53,14 +53,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cropping.cs" />
+    <Compile Include="Utils\Cropping.cs" />
     <Compile Include="Packing\MaxRectsBinPack.cs" />
     <Compile Include="Packing\Packer.cs" />
+    <Compile Include="SheetFolder.cs" />
+    <Compile Include="SheetFolderImporter.cs" />
+    <Compile Include="SheetFolderProcessor.cs" />
     <Compile Include="SheetProcessor.cs" />
     <Compile Include="GridSheetProcessor.cs" />
     <Compile Include="SheetContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GridSheetContent.cs" />
+    <Compile Include="Utils\BitmapExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

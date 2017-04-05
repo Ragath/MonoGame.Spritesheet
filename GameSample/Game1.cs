@@ -15,8 +15,11 @@ namespace GameSample
         SpriteBatch spriteBatch;
 
         GridSheet OverworldSheet { get; set; }
+
+        Sheet EnemySheet { get; set; }
         Sheet CharacterSheet { get; set; }
         Rectangle[] WalkingAnimation { get; set; }
+
 
         public Game1()
         {
@@ -36,6 +39,7 @@ namespace GameSample
             OverworldSheet = Content.Load<GridSheet>("Overworld");
 
             CharacterSheet = Content.Load<Sheet>("character");
+            EnemySheet = Content.Load<Sheet>("Enemy");
 
             WalkingAnimation = new[]
             {
@@ -86,6 +90,10 @@ namespace GameSample
                 //Draw character sprites
                 spriteBatch.Draw(CharacterSheet.Texture, Vector2.UnitX * 16, CharacterSheet[0], Color.White);
                 spriteBatch.Draw(CharacterSheet.Texture, Vector2.UnitX * 48 + Vector2.UnitY * 16, GetFrameSource(WalkingAnimation, 0.7, gameTime), Color.White);
+
+                //Draw enemy
+                spriteBatch.Draw(EnemySheet.Texture, Vector2.UnitX * 32 + Vector2.UnitY * 48, EnemySheet[0], Color.White);
+
             }
             spriteBatch.End();
 
