@@ -34,7 +34,8 @@ namespace MonoGame.Spritesheet.Pipeline.Packing
             if (rects.Length != bin.usedRectangles.Count)
                 throw new Exception($"{nameof(bin.usedRectangles)}: {bin.usedRectangles.Count} Expected: {rects.Length}");
 
-            if (input.GetUnionArea() < minBinArea)
+            var inputUnionArea = input.GetUnionArea();
+            if (inputUnionArea < minBinArea && inputUnionArea > input.GetArea())
                 return input.ToArray();
             else
                 return output;
