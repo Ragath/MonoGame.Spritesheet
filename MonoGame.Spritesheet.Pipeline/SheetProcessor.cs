@@ -53,7 +53,7 @@ namespace MonoGame.Spritesheet.Pipeline
                 }
             }
 
-            TrimSources(ref sources, input, ColorKeyEnabled ? ColorKeyColor : Color.TransparentBlack, Padding);
+            var origins = TrimSources(ref sources, input, ColorKeyEnabled ? ColorKeyColor : Color.TransparentBlack, Padding);
             var destinations = Packer.Pack(sources);
             //Deflate
             for (int i = 0; i < destinations.Length; i++)
@@ -69,25 +69,29 @@ namespace MonoGame.Spritesheet.Pipeline
             {
                 Texture = texture,
                 Names = names,
-                Sources = destinations
+                Sources = destinations,
+                Origins = origins
             };
 
             context.Logger.LogMessage($"Fillrate: {(double)result.Sources.GetArea() / result.Sources.GetUnionArea()}");
             return result;
         }
 
-        static void TrimSources(ref Rectangle[] sources, TextureContent texture, Color colorKey, int padding)
+        static IReadOnlyList<Vector2> TrimSources(ref Rectangle[] sources, TextureContent texture, Color colorKey, int padding)
         {
             var sourceBitmap = texture.Faces.Single().Single();
             var destinationBitmap = new PixelBitmapContent<Color>(sourceBitmap.Width, sourceBitmap.Height);
             BitmapContent.Copy(sourceBitmap, destinationBitmap);
+
+            var origins = new Vector2[sources.Length];
             for (int i = 0; i < sources.Length; i++)
             {
                 ref Rectangle src = ref sources[i];
-                Cropping.TrimRect(ref src, destinationBitmap, colorKey);
+                origins[i] = -Cropping.TrimRect(ref src, destinationBitmap, colorKey);
                 //Inflate
                 src.Inflate(padding, padding);
             }
+            return origins;
         }
 
         static void PackTexture(Rectangle[] sources, Rectangle[] destinations, ref TextureContent texture, int padding)

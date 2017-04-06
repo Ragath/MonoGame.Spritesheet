@@ -13,7 +13,7 @@ using MonoGame.Spritesheet.Pipeline.Utils;
 
 namespace MonoGame.Spritesheet.Pipeline
 {
-    [ContentProcessor(DisplayName ="SheetFolder - Spritesheet")]
+    [ContentProcessor(DisplayName = "SheetFolder - Spritesheet")]
     public class SheetFolderProcessor : ContentProcessor<SheetFolder, SheetContent>
     {
         [DefaultValue(typeof(Color), "255,0,255,255")]
@@ -47,7 +47,7 @@ namespace MonoGame.Spritesheet.Pipeline
                 }
             }
 
-            TrimSources(ref sources, input.Textures, names, ColorKeyEnabled ? ColorKeyColor : Color.TransparentBlack, Padding);
+            var origins = TrimSources(ref sources, input.Textures, names, ColorKeyEnabled ? ColorKeyColor : Color.TransparentBlack, Padding);
             var destinations = Packer.Pack(sources);
             //Deflate
             for (int i = 0; i < destinations.Length; i++)
@@ -57,21 +57,23 @@ namespace MonoGame.Spritesheet.Pipeline
             }
 
             var tmp = PackTexture(sources, destinations, input.Textures, names, Padding);
-            
+
             var texture = context.Convert<TextureContent, Texture2DContent>(tmp, nameof(TextureProcessor), context.Parameters);
             var result = new SheetContent
             {
                 Texture = texture,
                 Names = names,
-                Sources = destinations
+                Sources = destinations,
+                Origins = origins
             };
 
             context.Logger.LogMessage($"Fillrate: {(double)result.Sources.GetArea() / result.Sources.GetUnionArea()}");
             return result;
         }
 
-        static void TrimSources(ref Rectangle[] sources, IEnumerable<TextureContent> textures, Dictionary<string, int> names, Color colorKey, int padding)
+        static IReadOnlyList<Vector2> TrimSources(ref Rectangle[] sources, IEnumerable<TextureContent> textures, Dictionary<string, int> names, Color colorKey, int padding)
         {
+            var origins = new List<Vector2>(sources.Length);
             foreach (var texture in textures)
             {
                 var sourceBitmap = texture.Faces.Single().Single();
@@ -79,10 +81,12 @@ namespace MonoGame.Spritesheet.Pipeline
                 BitmapContent.Copy(sourceBitmap, destinationBitmap);
 
                 ref Rectangle src = ref sources[names[texture.Name]];
-                Cropping.TrimRect(ref src, destinationBitmap, colorKey);
+                var offset = Cropping.TrimRect(ref src, destinationBitmap, colorKey);
+                origins.Add(-offset);
                 //Inflate
                 src.Inflate(padding, padding);
             }
+            return origins;
         }
 
         static Texture2DContent PackTexture(Rectangle[] sources, Rectangle[] destinations, IEnumerable<TextureContent> textures, Dictionary<string, int> names, int padding)

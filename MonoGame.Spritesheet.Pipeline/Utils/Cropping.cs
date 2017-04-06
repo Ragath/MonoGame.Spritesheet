@@ -5,25 +5,27 @@ namespace MonoGame.Spritesheet.Pipeline.Utils
 {
     static class Cropping
     {
-        public static void TrimRect(ref Rectangle rect, PixelBitmapContent<Color> bitmap, Color colorKey)
+        public static Vector2 TrimRect(ref Rectangle rect, PixelBitmapContent<Color> bitmap, Color colorKey)
         {
+            var offsetX = GetLeft(ref rect, bitmap, colorKey);
+            rect.X += offsetX;
+            rect.Width -= offsetX;
+
+            var offsetY = GetTop(ref rect, bitmap, colorKey);
+            rect.Y += offsetY;
+            rect.Height -= offsetY;
+
             int delta;
-
-            delta = TrimLeft(ref rect, bitmap, colorKey);
-            rect.X += delta;
+            delta = GetRight(ref rect, bitmap, colorKey);
             rect.Width -= delta;
 
-            delta = TrimRight(ref rect, bitmap, colorKey);
-            rect.Width -= delta;
+            delta = GetBottom(ref rect, bitmap, colorKey);
+            rect.Height -= delta;
 
-            delta = TrimTop(ref rect, bitmap, colorKey);
-            rect.Y += delta;
-            rect.Height -= delta;
-            delta = TrimBottom(ref rect, bitmap, colorKey);
-            rect.Height -= delta;
+            return new Vector2(offsetX, offsetY);
         }
 
-        static int TrimLeft(ref Rectangle rect, PixelBitmapContent<Color> bitmap, Color colorKey)
+        static int GetLeft(ref Rectangle rect, PixelBitmapContent<Color> bitmap, Color colorKey)
         {
             for (int x = rect.Left, i = 0; x < rect.Right; x++, i++)
             {
@@ -36,7 +38,7 @@ namespace MonoGame.Spritesheet.Pipeline.Utils
             }
             return 0;
         }
-        static int TrimRight(ref Rectangle rect, PixelBitmapContent<Color> bitmap, Color colorKey)
+        static int GetRight(ref Rectangle rect, PixelBitmapContent<Color> bitmap, Color colorKey)
         {
             for (int x = rect.Right - 1, i = 0; x >= rect.Left; x--, i++)
             {
@@ -50,7 +52,7 @@ namespace MonoGame.Spritesheet.Pipeline.Utils
             return 0;
         }
 
-        static int TrimTop(ref Rectangle rect, PixelBitmapContent<Color> bitmap, Color colorKey)
+        static int GetTop(ref Rectangle rect, PixelBitmapContent<Color> bitmap, Color colorKey)
         {
             for (int y = rect.Top, i = 0; y < rect.Bottom; y++, i++)
             {
@@ -63,7 +65,7 @@ namespace MonoGame.Spritesheet.Pipeline.Utils
             }
             return 0;
         }
-        static int TrimBottom(ref Rectangle rect, PixelBitmapContent<Color> bitmap, Color colorKey)
+        static int GetBottom(ref Rectangle rect, PixelBitmapContent<Color> bitmap, Color colorKey)
         {
             for (int y = rect.Bottom - 1, i = 0; y >= rect.Top; y--, i++)
             {

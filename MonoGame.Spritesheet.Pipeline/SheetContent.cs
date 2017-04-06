@@ -11,5 +11,6 @@ namespace MonoGame.Spritesheet.Pipeline
         public Texture2DContent Texture { get; set; }
         public IReadOnlyDictionary<string, int> Names { get; set; }
         public IReadOnlyList<Rectangle> Sources { get; set; }
+        public IReadOnlyList<Vector2> Origins { get; set; }
     }
 }

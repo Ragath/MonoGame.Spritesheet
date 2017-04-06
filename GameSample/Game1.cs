@@ -18,7 +18,7 @@ namespace GameSample
 
         Sheet EnemySheet { get; set; }
         Sheet CharacterSheet { get; set; }
-        Rectangle[] WalkingAnimation { get; set; }
+        (Rectangle source, Vector2 origin)[] WalkingAnimation { get; set; }
 
 
         public Game1()
@@ -43,10 +43,10 @@ namespace GameSample
 
             WalkingAnimation = new[]
             {
-                CharacterSheet["Walking0"],
-                CharacterSheet["Walking4"],
-                CharacterSheet["Walking8"],
-                CharacterSheet["Walking12"]
+                (CharacterSheet["Walking0"], CharacterSheet.GetOrigin("Walking0")),
+                (CharacterSheet["Walking4"], CharacterSheet.GetOrigin("Walking4")),
+                (CharacterSheet["Walking8"], CharacterSheet.GetOrigin("Walking8")),
+                (CharacterSheet["Walking12"], CharacterSheet.GetOrigin("Walking12"))
             };
         }
 
@@ -88,11 +88,11 @@ namespace GameSample
                 spriteBatch.Draw(OverworldSheet.Texture, Vector2.UnitX * 4 * tileSize, OverworldSheet[5, 5], Color.White);
 
                 //Draw character sprites
-                spriteBatch.Draw(CharacterSheet.Texture, Vector2.UnitX * 16, CharacterSheet[0], Color.White);
-                spriteBatch.Draw(CharacterSheet.Texture, Vector2.UnitX * 48 + Vector2.UnitY * 16, GetFrameSource(WalkingAnimation, 0.7, gameTime), Color.White);
+                spriteBatch.Draw(CharacterSheet.Texture, Vector2.UnitX * 16, CharacterSheet[0], Color.White, CharacterSheet.GetOrigin(0));
+                spriteBatch.Draw(CharacterSheet.Texture, Vector2.UnitX * 48 + Vector2.UnitY * 16, GetFrameSource(WalkingAnimation, 0.7, gameTime, out var origin), Color.White, origin);
 
                 //Draw enemy
-                spriteBatch.Draw(EnemySheet.Texture, Vector2.UnitX * 32 + Vector2.UnitY * 48, EnemySheet[0], Color.White);
+                spriteBatch.Draw(EnemySheet.Texture, Vector2.UnitX * 32 + Vector2.UnitY * 48, EnemySheet[0], Color.White, EnemySheet.GetOrigin(0));
 
             }
             spriteBatch.End();
@@ -100,10 +100,11 @@ namespace GameSample
             base.Draw(gameTime);
         }
 
-        static Rectangle GetFrameSource(Rectangle[] animation, double duration, GameTime gameTime)
+        static Rectangle GetFrameSource((Rectangle source, Vector2 origin)[] animation, double duration, GameTime gameTime, out Vector2 origin)
         {
             var i = (int)(gameTime.TotalGameTime.TotalSeconds * animation.Length / duration % animation.Length);
-            return animation[i];
+            origin = animation[i].origin;
+            return animation[i].source;
         }
     }
 }
