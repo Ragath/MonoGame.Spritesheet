@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Spritesheet.Pipeline", "MonoGame.Spritesheet.Pipeline\MonoGame.Spritesheet.Pipeline.csproj", "{B6CF4961-729C-4D94-B087-922DE28345C8}"
 EndProject
@@ -10,6 +10,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameSample", "GameSample\GameSample.csproj", "{D2853C99-C783-4743-9097-A111FA0DDCBE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B6CF4961-729C-4D94-B087-922DE28345C8} = {B6CF4961-729C-4D94-B087-922DE28345C8}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FBA99289-02B6-4FB9-8791-7DAF83ED7B4F}"
+	ProjectSection(SolutionItems) = preProject
+		GitVersionWorkaround.targets = GitVersionWorkaround.targets
 	EndProjectSection
 EndProject
 Global
