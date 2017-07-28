@@ -1,4 +1,5 @@
 # MonoGame.Spritesheet
+[![Build status](https://ci.appveyor.com/api/projects/status/t4gruw3f5upjt8k7/branch/master?svg=true)](https://ci.appveyor.com/project/Ragath/monogame-spritesheet/branch/master)  
 Everything you need to load and draw sprites from spritesheets in MonoGame!
 
 ## Nugets
