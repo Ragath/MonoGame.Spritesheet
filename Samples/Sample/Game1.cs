@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Spritesheet;
 
-namespace GameSample
+namespace Sample
 {
     /// <summary>
     /// This is the main type for your game.
@@ -23,8 +23,14 @@ namespace GameSample
 
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = 1280,
+                PreferredBackBufferHeight = 720,
+                SynchronizeWithVerticalRetrace = true
+            };
             Content.RootDirectory = "Content";
+            graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
         }
 
         /// <summary>
