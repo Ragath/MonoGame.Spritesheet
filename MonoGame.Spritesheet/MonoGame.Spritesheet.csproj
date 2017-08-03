@@ -4,6 +4,15 @@
     <TargetFramework>netstandard1.0</TargetFramework>
     <PackageTargetFallback>portable-win8+net45+wpa81</PackageTargetFallback>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!--Fixes Xamarin.Android issues-->
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>True</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <PackageId>MonoGame.Spritesheet</PackageId>
     <Product>MonoGame.Spritesheet</Product>
     <Description>Adds support for Spritesheets in MonoGame.</Description>
@@ -20,8 +29,12 @@
     <PackageReference Include="GitVersionTask" Version="4.0.0-beta0012">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NETCore.Portable.Compatibility" Version="1.0.1" />
-    <PackageReference Include="MonoGame.Framework.Portable" Version="3.6.0.1625" />
+    <PackageReference Include="Microsoft.NETCore.Portable.Compatibility" Version="1.0.1">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="MonoGame.Framework.Portable" Version="3.6.0.1625">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <Import Project="..\GitVersionWorkaround.targets" />
