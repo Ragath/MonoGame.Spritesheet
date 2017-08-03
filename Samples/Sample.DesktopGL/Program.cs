@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameSample
+namespace Sample.DesktopGL
 {
     /// <summary>
     /// The main class.
@@ -13,7 +13,7 @@ namespace GameSample
         [STAThread]
         static void Main()
         {
-            using (var game = new Sample.Game1())
+            using (var game = new Game1())
                 game.Run();
         }
     }
