@@ -10,7 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:..\..\MonoGame.Spritesheet.Pipeline\bin\Release\net45\MonoGame.Spritesheet.Pipeline.dll
+/reference:../../MonoGame.Spritesheet.Pipeline/bin/Debug/MonoGame.Spritesheet.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 

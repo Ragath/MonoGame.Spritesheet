@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 
-namespace MonoGame.Spritesheet.Pipeline
+namespace MonoGame.Spritesheet.Pipeline;
+
+public class SheetFolder
 {
-    public class SheetFolder
-    {
-        [JsonRequired]
-        public string FolderPath { get; set; }
-        [JsonRequired]
-        public string Filter { get; set; }
-        [JsonIgnore]
-        public IReadOnlyList<TextureContent> Textures { get; set; }
-    }
+    [Required]
+    public string FolderPath { get; set; }
+    [Required]
+    public string Filter { get; set; }
+    [JsonIgnore]
+    public IReadOnlyList<TextureContent> Textures { get; set; }
 }

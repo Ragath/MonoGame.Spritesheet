@@ -1,28 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
-    <PackageTargetFallback>portable-win8+net45+wpa81</PackageTargetFallback>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <!--Fixes Xamarin.Android issues-->
-    <DebugType>pdbonly</DebugType>
-    <DebugSymbols>True</DebugSymbols>
-  </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303">
+			<PrivateAssets>All</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\MonoGame.Spritesheet\MonoGame.Spritesheet.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NETCore.Portable.Compatibility" Version="1.0.1">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="MonoGame.Framework.Portable" Version="3.6.0.1625">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="System.ValueTuple" Version="4.3.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="../../MonoGame.Spritesheet/MonoGame.Spritesheet.csproj" />
+	</ItemGroup>
 
 </Project>
