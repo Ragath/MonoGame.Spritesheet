@@ -1,24 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonoGame.Spritesheet.Pipeline", "MonoGame.Spritesheet.Pipeline\MonoGame.Spritesheet.Pipeline.csproj", "{B6CF4961-729C-4D94-B087-922DE28345C8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonoGame.Spritesheet", "MonoGame.Spritesheet\MonoGame.Spritesheet.csproj", "{FE6D8C5F-6F96-4449-A815-40C115C68311}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FBA99289-02B6-4FB9-8791-7DAF83ED7B4F}"
-	ProjectSection(SolutionItems) = preProject
-		GitVersionWorkaround.targets = GitVersionWorkaround.targets
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{B4F3FD3A-053E-4082-8F3C-E381B5A56436}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.DesktopGL", "Samples\Sample.DesktopGL\Sample.DesktopGL.csproj", "{0F3467B1-DBDC-4B7E-BF0F-F5A68B2E4CA1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Samples\Sample\Sample.csproj", "{60594BB1-75CD-4F0F-9227-69395D7FD0D9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Android", "Samples\Sample.Android\Sample.Android.csproj", "{F9C6D599-E1CC-438C-8D81-3BDCD47553E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,27 +21,11 @@ Global
 		{FE6D8C5F-6F96-4449-A815-40C115C68311}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE6D8C5F-6F96-4449-A815-40C115C68311}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE6D8C5F-6F96-4449-A815-40C115C68311}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0F3467B1-DBDC-4B7E-BF0F-F5A68B2E4CA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0F3467B1-DBDC-4B7E-BF0F-F5A68B2E4CA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0F3467B1-DBDC-4B7E-BF0F-F5A68B2E4CA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0F3467B1-DBDC-4B7E-BF0F-F5A68B2E4CA1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{60594BB1-75CD-4F0F-9227-69395D7FD0D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{60594BB1-75CD-4F0F-9227-69395D7FD0D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{60594BB1-75CD-4F0F-9227-69395D7FD0D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{60594BB1-75CD-4F0F-9227-69395D7FD0D9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F9C6D599-E1CC-438C-8D81-3BDCD47553E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F9C6D599-E1CC-438C-8D81-3BDCD47553E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F9C6D599-E1CC-438C-8D81-3BDCD47553E3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{F9C6D599-E1CC-438C-8D81-3BDCD47553E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F9C6D599-E1CC-438C-8D81-3BDCD47553E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F9C6D599-E1CC-438C-8D81-3BDCD47553E3}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{0F3467B1-DBDC-4B7E-BF0F-F5A68B2E4CA1} = {B4F3FD3A-053E-4082-8F3C-E381B5A56436}
-		{60594BB1-75CD-4F0F-9227-69395D7FD0D9} = {B4F3FD3A-053E-4082-8F3C-E381B5A56436}
-		{F9C6D599-E1CC-438C-8D81-3BDCD47553E3} = {B4F3FD3A-053E-4082-8F3C-E381B5A56436}
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0DF57CC6-0D25-4E7A-909A-FCF898C90742}
 	EndGlobalSection
 EndGlobal

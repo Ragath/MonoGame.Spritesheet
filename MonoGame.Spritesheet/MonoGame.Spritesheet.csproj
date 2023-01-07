@@ -1,20 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
-    <PackageTargetFallback>portable-win8+net45+wpa81</PackageTargetFallback>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-  </PropertyGroup>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
 
-  <PropertyGroup>
-    <!--Fixes Xamarin.Android issues-->
-    <DebugType>pdbonly</DebugType>
-    <DebugSymbols>True</DebugSymbols>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <PackageId>MonoGame.Spritesheet</PackageId>
-    <Product>MonoGame.Spritesheet</Product>
     <Description>Adds support for Spritesheets in MonoGame.</Description>
     <Company>Daniel Sör</Company>
     <Authors>Daniel Sör</Authors>
@@ -26,16 +14,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GitVersionTask" Version="4.0.0-beta0012">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.NETCore.Portable.Compatibility" Version="1.0.1">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="MonoGame.Framework.Portable" Version="3.6.0.1625">
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
 
-  <Import Project="..\GitVersionWorkaround.targets" />
 </Project>
